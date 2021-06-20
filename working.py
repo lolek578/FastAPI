@@ -10,6 +10,11 @@ class Item(BaseModel):
     price: float
     brand: Optional[str] = None
 
+class UpdateItem(BaseModel):
+    name: Optional[str] = None
+    price: Optional[float] = None
+    brand: Optional[str] = None
+
 
 inventory = {}
 
@@ -39,7 +44,7 @@ def create_item(item_id: int, item: Item):
 
 
 @app.put("/update-item/{item_id}")
-def update_item(item_id: int, item: Item):
+def update_item(item_id: int, item: UpdateItem):
     if item_id not in inventory:
         return {"Error": "Item ID does not exists."}
 

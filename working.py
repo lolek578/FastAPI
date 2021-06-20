@@ -48,5 +48,10 @@ def update_item(item_id: int, item: UpdateItem):
     if item_id not in inventory:
         return {"Error": "Item ID does not exists."}
 
-    inventory[item_id].update(item)
+    if item.name != None:
+        inventory[item_id].name = item.name
+    if item.price != None:
+        inventory[item_id].price = item.price
+    if item.brand != None:
+        inventory[item_id].brand = item.brand
     return inventory[item_id]

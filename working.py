@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Path
 
 app = FastAPI()
 
@@ -19,5 +19,13 @@ inventory = {
 
 
 @app.get("/get-item/{item_id}")
-def get_item(item_id: int):
+def get_item(item_id: int = Path(None, description="the id of the item you view")):
     return inventory[item_id]
+
+#query parameter
+@app.get("/get-by-name")
+def get_item(name: str):
+    for item_id in inventory:
+        if inventory[item_id]["name"] == name:
+            return inventory[item_id]
+    return {"Data": "Not Found"}

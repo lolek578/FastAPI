@@ -2,13 +2,22 @@ from fastapi import FastAPI
 
 app = FastAPI()
 
+# the key is product id, value is product
+inventory = {
+    1: {
+        "name": "milk",
+        "price": 3.99,
+        "brand": "Regular"
+    },
 
-# create endpoints
-@app.get("/")
-def home():
-    return {"message": "Hello world!"}
+    2: {
+        "name": "chocolate",
+        "price": 5.00,
+        "brand": "Schogetten"
+    }
+}
 
 
-@app.get("/about")
-def about():
-    return {"Data": "About"}
+@app.get("/get-item/{item_id}")
+def get_item(item_id: int):
+    return inventory[item_id]
